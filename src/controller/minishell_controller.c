@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-void	cmd_run(char *line)
+void cmd_run(char *line)
 {
-	t_deque	p_token;
-	t_token	buf_token;
-	char	**lexer_line;
+	t_deque p_token;
+	t_token buf_token;
+	char **lexer_line;
 
 	lexer_line = lexer(line);
 	p_token = make_tokens(lexer_line);
@@ -35,7 +35,7 @@ void	cmd_run(char *line)
 	ft_free_strs(lexer_line);
 }
 
-void	sig_readline(int signo)
+void sig_readline(int signo)
 {
 	g_system_var.status = 128 + signo;
 	if (signo == SIGINT)
@@ -51,12 +51,12 @@ void	sig_readline(int signo)
 		else
 			ft_putendl_fd("", STDOUT_FILENO);
 	}
-	return ;
+	return;
 }
 
-static char	*set_read_line(void)
+static char *set_read_line(void)
 {
-	char	*line;
+	char *line;
 
 	signal(SIGINT, sig_readline);
 	signal(SIGQUIT, SIG_IGN);
@@ -71,18 +71,18 @@ static char	*set_read_line(void)
 	return (line);
 }
 
-void	minishell_start(void)
+void minishell_start(void)
 {
-	char	*cmd_line;
+	char *cmd_line;
 
 	while (1)
-	{	
+	{
 		g_system_var.hd_flag = 0;
 		cmd_line = set_read_line();
 		if (cmd_line[0] == 0)
 		{
 			free(cmd_line);
-			continue ;
+			continue;
 		}
 		if (!cmd_line)
 			exit(0);

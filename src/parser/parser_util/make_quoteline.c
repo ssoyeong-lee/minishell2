@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
-char	*remove_quote(char *s, char c)
+char *remove_quote(char *s, char c)
 {
-	char	*result;
-	int		i;
-	int		j;
-	int		cnt;
+	char *result;
+	int i;
+	int j;
+	int cnt;
 
 	i = 0;
 	cnt = 0;
@@ -40,9 +40,9 @@ char	*remove_quote(char *s, char c)
 	return (result);
 }
 
-int	find_env(char *s)
+int find_env(char *s)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (s[i])
@@ -54,19 +54,19 @@ int	find_env(char *s)
 	return (0);
 }
 
-void	make_single_quote(char *s, t_lst *list)
+void make_single_quote(char *s, t_lst *list)
 {
-	char	*node;
+	char *node;
 
 	node = remove_quote(s, '\'');
 	insert_node(list, l_size(list), node);
 	free(node);
 }
 
-char	*loop_convert(char *s)
+char *loop_convert(char *s)
 {
-	char	*env_convert;
-	char	*temp;
+	char *env_convert;
+	char *temp;
 
 	env_convert = convert_env(s);
 	while (find_env(env_convert))
@@ -78,16 +78,16 @@ char	*loop_convert(char *s)
 	return (env_convert);
 }
 
-void	make_quoteline(t_lst *list, char *s)
+void make_quoteline(t_lst *list, char *s)
 {
-	char	*env_convert;
-	char	*node;
+	char *env_convert;
+	char *node;
 
 	if (ft_strchr("\"", s[0]))
 	{
 		env_convert = loop_convert(s);
 		if (ft_strncmp("(null)", env_convert, 6) == 0)
-		{	
+		{
 			node = remove_quote(s, '\"');
 			insert_node(list, l_size(list), node);
 		}

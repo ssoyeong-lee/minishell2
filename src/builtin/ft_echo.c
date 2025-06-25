@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-void	ft_echo(char **cmds)
+void ft_echo(char **cmds)
 {
-	int	i;
-	int	tag;
+	int i;
+	int tag;
 
 	i = 1;
 	tag = 1;

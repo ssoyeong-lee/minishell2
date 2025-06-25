@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-static char	*find_real_path(char *path)
+static char *find_real_path(char *path)
 {
-	t_dictionary_node	*env;
-	char				*real_path;
+	t_dictionary_node *env;
+	char *real_path;
 
 	if (!path || ft_strcmp(path, "~") == 0)
 	{
@@ -40,18 +40,18 @@ static char	*find_real_path(char *path)
 	return (real_path);
 }
 
-static void	set_cd_env(void)
+static void set_cd_env(void)
 {
-	t_dictionary_node	*oldpwd;
-	t_dictionary_node	*pwd;
-	char				*real_path;
+	t_dictionary_node *oldpwd;
+	t_dictionary_node *pwd;
+	char *real_path;
 
 	oldpwd = dictionary_search(g_system_var.env, "OLDPWD");
 	pwd = dictionary_search(g_system_var.env, "PWD");
 	if (oldpwd)
 		dictionary_delete(&g_system_var.env, "OLDPWD");
-	dictionary_add(&g_system_var.env, ft_strdup("OLDPWD"), \
-	ft_strdup(pwd->value));
+	dictionary_add(&g_system_var.env, ft_strdup("OLDPWD"),
+								 ft_strdup(pwd->value));
 	if (pwd)
 		dictionary_delete(&g_system_var.env, "PWD");
 	real_path = getcwd(NULL, 0);
@@ -59,12 +59,12 @@ static void	set_cd_env(void)
 	{
 		perror("minishell: cd: ");
 		g_system_var.status = 2;
-		return ;
+		return;
 	}
 	dictionary_add(&g_system_var.env, ft_strdup("PWD"), real_path);
 }
 
-static	void	print_err(char *cmd)
+static void print_err(char *cmd)
 {
 	if (!cmd || *cmd == '~')
 	{
@@ -78,10 +78,10 @@ static	void	print_err(char *cmd)
 	}
 }
 
-void	ft_cd(char **cmds)
+void ft_cd(char **cmds)
 {
-	int		ret;
-	char	*real_path;
+	int ret;
+	char *real_path;
 
 	real_path = find_real_path(cmds[1]);
 	if (!cmds[1] || !ft_strcmp(cmds[1], "-") || !ft_strcmp(cmds[1], "~"))
@@ -91,7 +91,7 @@ void	ft_cd(char **cmds)
 		else
 		{
 			print_err(cmds[1]);
-			return ;
+			return;
 		}
 	}
 	ret = chdir(real_path);
@@ -100,7 +100,7 @@ void	ft_cd(char **cmds)
 	{
 		perror("minishell: cd");
 		g_system_var.status = 1;
-		return ;
+		return;
 	}
 	set_cd_env();
 	g_system_var.status = 0;

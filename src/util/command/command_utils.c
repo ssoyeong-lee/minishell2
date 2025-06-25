@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
-static	int	ft_scan_dir(char *dir_name, char *cmd)
+static int ft_scan_dir(char *dir_name, char *cmd)
 {
-	DIR				*dir;
-	struct dirent	*dirp;
+	DIR *dir;
+	struct dirent *dirp;
 
 	dir = opendir(dir_name);
 	if (!dir)
@@ -27,7 +27,7 @@ static	int	ft_scan_dir(char *dir_name, char *cmd)
 	{
 		dirp = readdir(dir);
 		if (!dirp)
-			break ;
+			break;
 		if (ft_strcmp(dirp->d_name, cmd) == 0)
 		{
 			closedir(dir);
@@ -38,10 +38,10 @@ static	int	ft_scan_dir(char *dir_name, char *cmd)
 	return (0);
 }
 
-static char	*make_absolute_path(char *path, char *cmd)
+static char *make_absolute_path(char *path, char *cmd)
 {
-	char	*res;
-	char	*tmp;
+	char *res;
+	char *tmp;
 
 	tmp = ft_strjoin(path, "/");
 	res = ft_strjoin(tmp, cmd);
@@ -49,11 +49,11 @@ static char	*make_absolute_path(char *path, char *cmd)
 	return (res);
 }
 
-char	*find_path(char *cmd)
+char *find_path(char *cmd)
 {
-	int					i;
-	char				**candidate;
-	t_dictionary_node	*env_path;
+	int i;
+	char **candidate;
+	t_dictionary_node *env_path;
 
 	if (*cmd == '/' || !ft_strncmp(cmd, "./", 2))
 		return (ft_strdup(cmd));
@@ -76,14 +76,14 @@ char	*find_path(char *cmd)
 	return (make_absolute_path(".", cmd));
 }
 
-void	find_cmd(char **cmd)
+void find_cmd(char **cmd)
 {
-	char	*tmp;
-	char	*start;
-	size_t	len;
+	char *tmp;
+	char *start;
+	size_t len;
 
 	if (**cmd != '/')
-		return ;
+		return;
 	start = ft_strrchr(*cmd, '/');
 	len = ft_strlen(start);
 	tmp = ft_substr(start, 1, len);
@@ -91,7 +91,7 @@ void	find_cmd(char **cmd)
 	*cmd = tmp;
 }
 
-void	minish_exit(char *msg, int code)
+void minish_exit(char *msg, int code)
 {
 	ft_putstr_fd("minish: ", STDERR_FILENO);
 	perror(msg);

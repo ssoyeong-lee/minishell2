@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 #include "../../include/token.h"
 
-void	heredoc_signal(int sig)
+void heredoc_signal(int sig)
 {
 	if (sig == SIGINT)
-	{	
+	{
 		g_system_var.hd_flag = 1;
 		write(2, "\n", 1);
 		heredoc_unlink();
@@ -24,7 +24,7 @@ void	heredoc_signal(int sig)
 	}
 }
 
-static void	write_heredoc(char *line, char *end_str, int hd_fd)
+static void write_heredoc(char *line, char *end_str, int hd_fd)
 {
 	while (ft_strcmp(line, end_str) != 0)
 	{
@@ -37,12 +37,12 @@ static void	write_heredoc(char *line, char *end_str, int hd_fd)
 	}
 }
 
-static void	heredoc_child(char *end_str, int hd_num)
+static void heredoc_child(char *end_str, int hd_num)
 {
-	int		hd_fd;
-	char	*line;
-	char	*hd_filename;
-	char	*temp;
+	int hd_fd;
+	char *line;
+	char *hd_filename;
+	char *temp;
 
 	temp = ft_itoa(hd_num);
 	hd_filename = ft_strjoin("here_doc", temp);
@@ -56,9 +56,9 @@ static void	heredoc_child(char *end_str, int hd_num)
 	exit(EXIT_SUCCESS);
 }
 
-void	heredoc_file_maker(char *end_str, int hd_num)
+void heredoc_file_maker(char *end_str, int hd_num)
 {
-	pid_t	pid;
+	pid_t pid;
 
 	pid = fork();
 	if (pid == -1)

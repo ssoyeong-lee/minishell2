@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-static void	set_child_pipe(t_token *t, int *prev_pipe, int *cur_pipe)
+static void set_child_pipe(t_token *t, int *prev_pipe, int *cur_pipe)
 {
 	if (prev_pipe[0] == -1 && !t->next)
 		;
@@ -37,16 +37,16 @@ static void	set_child_pipe(t_token *t, int *prev_pipe, int *cur_pipe)
 	}
 }
 
-static void	fail_to_run(char *cmd)
+static void fail_to_run(char *cmd)
 {
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putendl_fd(": command not found", STDERR_FILENO);
 	exit(127);
 }
 
-void	run_child(t_token *t, int *prev_pipe, int *cur_pipe)
+void run_child(t_token *t, int *prev_pipe, int *cur_pipe)
 {
-	char	*path;
+	char *path;
 
 	set_child_pipe(t, prev_pipe, cur_pipe);
 	if (t->redir->count != 0)
@@ -69,7 +69,7 @@ void	run_child(t_token *t, int *prev_pipe, int *cur_pipe)
 	}
 }
 
-void	run_parent(t_token *t, int *prev_pipe, int *cur_pipe)
+void run_parent(t_token *t, int *prev_pipe, int *cur_pipe)
 {
 	if (prev_pipe[0] == -1 && !t->next)
 		;
@@ -84,16 +84,16 @@ void	run_parent(t_token *t, int *prev_pipe, int *cur_pipe)
 	}
 }
 
-void	wait_children(void)
+void wait_children(void)
 {
-	int		e_status;
-	pid_t	pid;
+	int e_status;
+	pid_t pid;
 
 	while (1)
 	{
 		pid = waitpid(-1, &e_status, 0);
 		if (pid == -1)
-			break ;
+			break;
 		if (pid == g_system_var.last_pid)
 		{
 			if (WIFEXITED(e_status))

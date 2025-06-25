@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-t_dictionary	get_env(char **envp)
+t_dictionary get_env(char **envp)
 {
-	int				i;
-	char			**temp;
-	t_dictionary	env;
+	int i;
+	char **temp;
+	t_dictionary env;
 
 	dictionary_init(&env);
 	i = 0;

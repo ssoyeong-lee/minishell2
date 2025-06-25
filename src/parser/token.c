@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-int	count_row(char **strings)
+int count_row(char **strings)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (strings[i])
@@ -22,9 +22,9 @@ int	count_row(char **strings)
 	return (i);
 }
 
-void	make_cmdline(t_lst *list, char *s)
-{	
-	char	*env;
+void make_cmdline(t_lst *list, char *s)
+{
+	char *env;
 
 	if (ft_strchr(s, '$'))
 	{
@@ -36,23 +36,23 @@ void	make_cmdline(t_lst *list, char *s)
 		insert_node(list, l_size(list), s);
 }
 
-void	list_to_strs(t_lst *list, t_token *buf_token)
+void list_to_strs(t_lst *list, t_token *buf_token)
 {
-	int		i;
-	char	*temp;
-	int		s;
-	int		flag;
+	int i;
+	char *temp;
+	int s;
+	int flag;
 
 	i = 0;
 	s = (l_size(list) + 1);
 	flag = 0;
 	buf_token->cmdline = (char **)malloc(s * sizeof(char *));
 	while (s--)
-	{	
+	{
 		if (ft_strcmp(l_data(list, 0), "(null)") == 0)
 		{
 			delete_node(list, 0);
-			continue ;
+			continue;
 		}
 		temp = opt_convert(&flag, i, l_data(list, 0));
 		buf_token->cmdline[i] = temp;
@@ -63,9 +63,9 @@ void	list_to_strs(t_lst *list, t_token *buf_token)
 	free(list);
 }
 
-t_deque	make_tokens(char **lexer)
+t_deque make_tokens(char **lexer)
 {
-	t_token_info	t_i;
+	t_token_info t_i;
 
 	init_token_info(&t_i);
 	while (lexer[t_i.i])

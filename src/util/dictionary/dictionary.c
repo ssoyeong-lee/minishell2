@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
-void	dictionary_show(t_dictionary dic)
+void dictionary_show(t_dictionary dic)
 {
-	t_dictionary_node	*temp;
+	t_dictionary_node *temp;
 
 	temp = dic.head;
 	while (temp != NULL)
@@ -24,9 +24,9 @@ void	dictionary_show(t_dictionary dic)
 	}
 }
 
-int	dictionary_add(t_dictionary *head, char *key, char *value)
+int dictionary_add(t_dictionary *head, char *key, char *value)
 {
-	t_dictionary_node	*temp;
+	t_dictionary_node *temp;
 
 	temp = head->head;
 	while (1)
@@ -34,14 +34,14 @@ int	dictionary_add(t_dictionary *head, char *key, char *value)
 		if (head->count == 0)
 		{
 			head->head = dic_add_util(temp, key, value);
-			break ;
+			break;
 		}
 		else if (ft_strcmp(temp->key, key) == 0)
 			return (false);
 		else if (temp->link == NULL)
 		{
 			dic_add_util2(temp, key, value);
-			break ;
+			break;
 		}
 		else
 			temp = temp->link;
@@ -50,9 +50,9 @@ int	dictionary_add(t_dictionary *head, char *key, char *value)
 	return (true);
 }
 
-int	dictionary_delete(t_dictionary *head, char *key)
+int dictionary_delete(t_dictionary *head, char *key)
 {
-	t_dictionary_node	*ptr;
+	t_dictionary_node *ptr;
 
 	ptr = head->head;
 	while (true)
@@ -60,7 +60,7 @@ int	dictionary_delete(t_dictionary *head, char *key)
 		if (ptr == NULL)
 			return (false);
 		else if (ft_strcmp(ptr->key, key) == 0)
-			break ;
+			break;
 		ptr = ptr->link;
 	}
 	dic_del_util(ptr, head);
@@ -68,9 +68,9 @@ int	dictionary_delete(t_dictionary *head, char *key)
 	return (true);
 }
 
-t_dictionary_node	*dictionary_search(t_dictionary head, char *key)
+t_dictionary_node *dictionary_search(t_dictionary head, char *key)
 {
-	t_dictionary_node	*temp;
+	t_dictionary_node *temp;
 
 	temp = head.head;
 	while (1)
@@ -83,7 +83,7 @@ t_dictionary_node	*dictionary_search(t_dictionary head, char *key)
 	}
 }
 
-void	dictionary_init(t_dictionary *head)
+void dictionary_init(t_dictionary *head)
 {
 	head->count = 0;
 	head->head = NULL;

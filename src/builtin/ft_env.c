@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-void	ft_env(char **cmds)
+void ft_env(char **cmds)
 {
-	t_dictionary_node	*node;
+	t_dictionary_node *node;
 
 	if (!check_valid_opt(cmds, 0, "env [-]"))
 	{
 		g_system_var.status = 1;
-		return ;
+		return;
 	}
 	if (cmds[1])
 	{
@@ -27,7 +27,7 @@ void	ft_env(char **cmds)
 		ft_putstr_fd(cmds[1], STDERR_FILENO);
 		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 		g_system_var.status = 127;
-		return ;
+		return;
 	}
 	node = g_system_var.env.head;
 	while (node)

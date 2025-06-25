@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-static void	print_env_export(void)
+static void print_env_export(void)
 {
-	t_dictionary_node	*tmp;
+	t_dictionary_node *tmp;
 
 	tmp = g_system_var.env.head;
 	while (tmp)
@@ -30,9 +30,9 @@ static void	print_env_export(void)
 	}
 }
 
-static void	add_env_export(char *env)
+static void add_env_export(char *env)
 {
-	char	**tmp;
+	char **tmp;
 
 	tmp = ft_split(env, '=');
 	if (dictionary_search(g_system_var.env, tmp[0]))
@@ -49,7 +49,7 @@ static void	add_env_export(char *env)
 		dictionary_add(&g_system_var.env, tmp[0], NULL);
 }
 
-static int	check_valid_arg(char *arg)
+static int check_valid_arg(char *arg)
 {
 	if (*arg == '=')
 	{
@@ -62,23 +62,23 @@ static int	check_valid_arg(char *arg)
 	return (1);
 }
 
-void	ft_export(char **cmds)
+void ft_export(char **cmds)
 {
-	int	i;
+	int i;
 
 	if (!check_valid_opt(cmds, 0, "export [-] [name[=value] ...]"))
-		return ;
+		return;
 	if (!cmds[1])
 	{
 		print_env_export();
 		g_system_var.status = 0;
-		return ;
+		return;
 	}
 	i = 1;
 	while (cmds[i])
 	{
 		if (!check_valid_arg(cmds[i]))
-			return ;
+			return;
 		add_env_export(cmds[i]);
 		i++;
 	}

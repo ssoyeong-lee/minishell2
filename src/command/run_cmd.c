@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-void	run_builtin(char **cmds)
+void run_builtin(char **cmds)
 {
 	if (!ft_strcmp(cmds[0], "cd"))
 		ft_cd(cmds);
@@ -30,9 +30,9 @@ void	run_builtin(char **cmds)
 		ft_exit(cmds);
 }
 
-void	run_cmdline(t_token *t, int *prev_pipe, int *cur_pipe)
+void run_cmdline(t_token *t, int *prev_pipe, int *cur_pipe)
 {
-	pid_t	pid;
+	pid_t pid;
 
 	pid = fork();
 	if (pid < 0)
@@ -53,26 +53,26 @@ void	run_cmdline(t_token *t, int *prev_pipe, int *cur_pipe)
 	}
 }
 
-void	no_pipe_builtin(t_token *t)
+void no_pipe_builtin(t_token *t)
 {
 	if (t->redir->count != 0)
 	{
 		if (set_in_out(t->redir->front))
-			return ;
+			return;
 	}
 	run_builtin(t->cmdline);
 	reset_in_out();
 }
 
-void	run_token(t_token *t)
+void run_token(t_token *t)
 {
-	int			cur_pipe[2];
-	int			prev_pipe[2];
+	int cur_pipe[2];
+	int prev_pipe[2];
 
 	if (!t->next && is_builtin(t->cmdline[0]))
 	{
 		no_pipe_builtin(t);
-		return ;
+		return;
 	}
 	cur_pipe[0] = -1;
 	while (t)

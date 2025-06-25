@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
-static char	*ft_str_envjoin(char const *s1, char const *s2)
+static char *ft_str_envjoin(char const *s1, char const *s2)
 {
-	char	*str;
-	size_t	i;
-	size_t	j;
+	char *str;
+	size_t i;
+	size_t j;
 
 	if (s1 == 0 || s2 == 0)
 		return (0);
@@ -40,12 +40,12 @@ static char	*ft_str_envjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-char	**make_envp(t_dictionary head)
+char **make_envp(t_dictionary head)
 {
-	t_dictionary_node	*temp;
-	char				**envp;
-	int					i;
-	char				*str;
+	t_dictionary_node *temp;
+	char **envp;
+	int i;
+	char *str;
 
 	envp = (char **)malloc((head.count + 1) * sizeof(char *));
 	temp = head.head;
@@ -55,7 +55,7 @@ char	**make_envp(t_dictionary head)
 		if (temp->key == NULL)
 		{
 			temp = temp->link;
-			continue ;
+			continue;
 		}
 		str = ft_str_envjoin(temp->key, temp->value);
 		if (!str)

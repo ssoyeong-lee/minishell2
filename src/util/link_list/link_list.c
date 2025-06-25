@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
-void	insert_node(t_lst *head, const int index, char *data)
+void insert_node(t_lst *head, const int index, char *data)
 {
-	int		k;
-	t_lst	*pre_node;
-	t_lst	*insert;
+	int k;
+	t_lst *pre_node;
+	t_lst *insert;
 
 	insert = (t_lst *)malloc(sizeof(t_lst));
 	pre_node = head;
@@ -27,17 +27,17 @@ void	insert_node(t_lst *head, const int index, char *data)
 	if (pre_node == NULL)
 	{
 		free(insert);
-		return ;
+		return;
 	}
 	insert->next = pre_node->next;
 	pre_node->next = insert;
 }
 
-void	delete_node(t_lst *head, const int index)
+void delete_node(t_lst *head, const int index)
 {
-	int		k;
-	t_lst	*temp;
-	t_lst	*garbage;
+	int k;
+	t_lst *temp;
+	t_lst *garbage;
 
 	garbage = NULL;
 	temp = head;
@@ -45,17 +45,17 @@ void	delete_node(t_lst *head, const int index)
 	while (k-- && temp != NULL)
 		temp = temp->next;
 	if (temp == NULL || temp->next == NULL)
-		return ;
+		return;
 	garbage = temp->next;
 	temp->next = garbage->next;
 	free(garbage->data);
 	free(garbage);
 }
 
-int	search(t_lst *head, const char *val)
+int search(t_lst *head, const char *val)
 {
-	int		index;
-	t_lst	*temp;
+	int index;
+	t_lst *temp;
 
 	if (head->next == NULL)
 		return (-1);
@@ -71,10 +71,10 @@ int	search(t_lst *head, const char *val)
 	return (index);
 }
 
-char	*l_data(t_lst *head, const int index)
+char *l_data(t_lst *head, const int index)
 {
-	int		k;
-	t_lst	*temp;
+	int k;
+	t_lst *temp;
 
 	if (head->next == NULL)
 		return ("(null)");
@@ -85,10 +85,10 @@ char	*l_data(t_lst *head, const int index)
 	return (temp->data);
 }
 
-int	l_size(t_lst *head)
+int l_size(t_lst *head)
 {
-	t_lst	*temp;
-	int		len;
+	t_lst *temp;
+	int len;
 
 	temp = head->next;
 	len = 0;

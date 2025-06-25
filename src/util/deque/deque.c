@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
-void	init_deque(t_deque *deque)
+void init_deque(t_deque *deque)
 {
 	deque->front = NULL;
 	deque->back = NULL;
 }
 
-void	input_front(t_deque *deque, t_token token)
+void input_front(t_deque *deque, t_token token)
 {
-	t_token	*new_token;
+	t_token *new_token;
 
 	new_token = (t_token *)malloc(sizeof(t_token));
 	new_token->cmdline = token.cmdline;
@@ -30,15 +30,15 @@ void	input_front(t_deque *deque, t_token token)
 		deque->front = new_token;
 		deque->back = new_token;
 		new_token->next = NULL;
-		return ;
+		return;
 	}
 	new_token->next = deque->front;
 	deque->front = new_token;
 }
 
-void	input_back(t_deque *deque, t_token token)
+void input_back(t_deque *deque, t_token token)
 {
-	t_token	*new_token;
+	t_token *new_token;
 
 	new_token = (t_token *)malloc(sizeof(t_token));
 	new_token->cmdline = token.cmdline;
@@ -48,17 +48,17 @@ void	input_back(t_deque *deque, t_token token)
 		deque->front = new_token;
 		deque->back = new_token;
 		new_token->next = NULL;
-		return ;
+		return;
 	}
 	deque->back->next = new_token;
 	deque->back = new_token;
 	new_token->next = NULL;
 }
 
-t_token	output_front(t_deque *deque)
+t_token output_front(t_deque *deque)
 {
-	t_token	result;
-	t_token	*temp;
+	t_token result;
+	t_token *temp;
 
 	if (deque->front == NULL)
 	{
@@ -82,10 +82,10 @@ t_token	output_front(t_deque *deque)
 	return (result);
 }
 
-t_token	output_back(t_deque *deque)
+t_token output_back(t_deque *deque)
 {
-	t_token	result;
-	t_token	*temp;
+	t_token result;
+	t_token *temp;
 
 	if (deque->back == NULL)
 	{

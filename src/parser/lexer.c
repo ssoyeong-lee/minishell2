@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-static int	count_words(const char *str, char c)
+static int count_words(const char *str, char c)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (*str)
@@ -28,11 +28,11 @@ static int	count_words(const char *str, char c)
 	return (i);
 }
 
-char	*word_dup(const char *str, int start, \
-					int finish, t_lexer_info *info)
+char *word_dup(const char *str, int start,
+							 int finish, t_lexer_info *info)
 {
-	char	*word;
-	int		i;
+	char *word;
+	int i;
 
 	i = 0;
 	word = malloc((finish - start + 1) * sizeof(char));
@@ -45,9 +45,9 @@ char	*word_dup(const char *str, int start, \
 	return (word);
 }
 
-static void	check_quotat(t_lexer_info *split_info, char const *s, char **split)
+static void check_quotat(t_lexer_info *split_info, char const *s, char **split)
 {
-	char	*temp;
+	char *temp;
 
 	temp = ft_substr(s, split_info->i, ft_strlen(s));
 	split_info->index = split_info->i;
@@ -65,14 +65,13 @@ static void	check_quotat(t_lexer_info *split_info, char const *s, char **split)
 	free(temp);
 }
 
-static char	**spt(char **split, char c, char const *s, t_lexer_info *info)
+static char **spt(char **split, char c, char const *s, t_lexer_info *info)
 {
 	while (info->i <= ft_strlen(s))
 	{
 		if (s[info->i] != c && info->index < 0)
 			check_quotat(info, s, split);
-		else if ((s[info->i] == c || info->i == ft_strlen(s)) \
-					&& info->index >= 0 && info->flag == 0)
+		else if ((s[info->i] == c || info->i == ft_strlen(s)) && info->index >= 0 && info->flag == 0)
 			split[info->j++] = word_dup(s, info->index, info->i, info);
 		else if (info->flag == 1 && s[info->i] == '\'')
 		{
@@ -94,10 +93,10 @@ static char	**spt(char **split, char c, char const *s, t_lexer_info *info)
 	return (split);
 }
 
-char	**lexer(char const *s)
+char **lexer(char const *s)
 {
-	char			**split;
-	t_lexer_info	*info;
+	char **split;
+	t_lexer_info *info;
 
 	info = (t_lexer_info *)malloc(sizeof(t_lexer_info));
 	info->flag = 0;

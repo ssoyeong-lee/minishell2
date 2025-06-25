@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-static int	get_open_mode(enum e_redir_type type)
+static int get_open_mode(enum e_redir_type type)
 {
-	int	oflag;
+	int oflag;
 
 	oflag = 0;
 	if (type == IN_REDIR || type == HERE_DOC)
@@ -26,9 +26,9 @@ static int	get_open_mode(enum e_redir_type type)
 	return (oflag);
 }
 
-static char	*get_title(t_redir *redir)
+static char *get_title(t_redir *redir)
 {
-	char	*title;
+	char *title;
 
 	if (redir->type == HERE_DOC)
 		title = ft_strjoin("here_doc", ft_itoa(redir->hd_number));
@@ -37,7 +37,7 @@ static char	*get_title(t_redir *redir)
 	return (title);
 }
 
-static int	check_valid_filename(int oflag, char *title)
+static int check_valid_filename(int oflag, char *title)
 {
 	if (oflag == IN_REDIR && access(title, F_OK) == -1)
 	{
@@ -49,11 +49,11 @@ static int	check_valid_filename(int oflag, char *title)
 	return (0);
 }
 
-int	set_in_out(t_redir *redir)
+int set_in_out(t_redir *redir)
 {
-	int		tmp;
-	int		oflag;
-	char	*title;
+	int tmp;
+	int oflag;
+	char *title;
 
 	while (redir)
 	{
@@ -75,7 +75,7 @@ int	set_in_out(t_redir *redir)
 	return (0);
 }
 
-void	reset_in_out(void)
+void reset_in_out(void)
 {
 	dup2(g_system_var.fdin, STDIN_FILENO);
 	dup2(g_system_var.fdout, STDOUT_FILENO);

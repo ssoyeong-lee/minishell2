@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
-void	export_lexer(char **split, char const *s, t_lexer_info *info)
+void export_lexer(char **split, char const *s, t_lexer_info *info)
 {
-	char	*temp;
+	char *temp;
 
 	if (s[info->i] == '\"')
 		info->q_cnt++;

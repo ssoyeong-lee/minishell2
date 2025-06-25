@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
-void	free_value_key(t_dictionary_node *ptr, t_dictionary *head, int flag)
+void free_value_key(t_dictionary_node *ptr, t_dictionary *head, int flag)
 {
 	free(ptr->key);
 	free(ptr->value);
@@ -20,7 +20,7 @@ void	free_value_key(t_dictionary_node *ptr, t_dictionary *head, int flag)
 		head->head = NULL;
 }
 
-void	dic_del_util(t_dictionary_node *ptr, t_dictionary *head)
+void dic_del_util(t_dictionary_node *ptr, t_dictionary *head)
 {
 	if (head->count == 1)
 		free_value_key(ptr, head, 1);
@@ -48,9 +48,9 @@ void	dic_del_util(t_dictionary_node *ptr, t_dictionary *head)
 	}
 }
 
-t_dictionary_node	*dic_add_util(t_dictionary_node *temp, \
-char *key, char *value)
-{	
+t_dictionary_node *dic_add_util(t_dictionary_node *temp,
+																char *key, char *value)
+{
 	temp = (t_dictionary_node *)malloc(sizeof(t_dictionary_node));
 	temp->key = key;
 	temp->value = value;
@@ -59,9 +59,9 @@ char *key, char *value)
 	return (temp);
 }
 
-t_dictionary_node	*dic_add_util2(t_dictionary_node *temp, \
-char *key, char *value)
-{	
+t_dictionary_node *dic_add_util2(t_dictionary_node *temp,
+																 char *key, char *value)
+{
 	temp->link = (t_dictionary_node *)malloc(sizeof(t_dictionary_node));
 	temp->link->key = key;
 	temp->link->value = value;
@@ -70,9 +70,9 @@ char *key, char *value)
 	return (temp);
 }
 
-void	dictionary_destroy(t_dictionary *head)
+void dictionary_destroy(t_dictionary *head)
 {
-	t_dictionary_node	*temp;
+	t_dictionary_node *temp;
 
 	temp = head->head;
 	while (temp != NULL)

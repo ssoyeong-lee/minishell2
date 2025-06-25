@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-void	ft_unset(char **cmds)
+void ft_unset(char **cmds)
 {
-	int		i;
+	int i;
 
 	i = 1;
 	while (cmds[i])
@@ -22,7 +22,7 @@ void	ft_unset(char **cmds)
 		if (is_option(cmds[i]))
 		{
 			perror_opt(cmds[0], abstract_opt(cmds[i]), "unset [-] [name ...]");
-			return ;
+			return;
 		}
 		if (dictionary_search(g_system_var.env, cmds[i]))
 			dictionary_delete(&g_system_var.env, cmds[i]);

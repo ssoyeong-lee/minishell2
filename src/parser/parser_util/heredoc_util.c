@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
-void	heredoc_unlink(void)
+void heredoc_unlink(void)
 {
-	int		hd_cnt;
-	char	*filename;
-	char	*temp;
+	int hd_cnt;
+	char *filename;
+	char *temp;
 
 	hd_cnt = 1;
 	while (hd_cnt <= g_system_var.hd_cnt)
@@ -31,10 +31,10 @@ void	heredoc_unlink(void)
 	}
 }
 
-void	heredoc_signal2(int sig)
+void heredoc_signal2(int sig)
 {
 	if (sig == SIGINT)
-	{	
+	{
 		g_system_var.hd_flag = 1;
 	}
 }

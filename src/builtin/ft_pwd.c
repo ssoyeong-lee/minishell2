@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-void	ft_pwd(char **cmds)
+void ft_pwd(char **cmds)
 {
-	char	*wd;
+	char *wd;
 
 	if (!check_valid_opt(cmds, 0, "pwd [-]"))
-		return ;
+		return;
 	wd = getcwd(NULL, 0);
 	if (!wd)
 	{

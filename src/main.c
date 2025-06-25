@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-void	init_system_var(char **envp)
+void init_system_var(char **envp)
 {
 	g_system_var.hd_cnt = 0;
 	g_system_var.status = 0;
@@ -24,7 +24,7 @@ void	init_system_var(char **envp)
 	g_system_var.nodisplay_set.c_lflag &= ~ECHOCTL;
 }
 
-int	main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;

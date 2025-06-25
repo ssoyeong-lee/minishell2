@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
-int	is_option(char *line)
+int is_option(char *line)
 {
 	if (line && *line == '-' && line + 1)
 		return (1);
 	return (0);
 }
 
-char	abstract_opt(char *line)
+char abstract_opt(char *line)
 {
 	line++;
 	while (*line && *(line + 1))
@@ -31,10 +31,10 @@ char	abstract_opt(char *line)
 	return (*line);
 }
 
-int	check_valid_opt(char **cmds, char opt, char *usage)
+int check_valid_opt(char **cmds, char opt, char *usage)
 {
-	int		i;
-	char	ab_opt;
+	int i;
+	char ab_opt;
 
 	i = 1;
 	while (cmds[i])
@@ -50,7 +50,7 @@ int	check_valid_opt(char **cmds, char opt, char *usage)
 	return (1);
 }
 
-void	perror_opt(char *cmd, char opt, char *usage)
+void perror_opt(char *cmd, char opt, char *usage)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(cmd, STDERR_FILENO);
@@ -63,14 +63,11 @@ void	perror_opt(char *cmd, char opt, char *usage)
 	g_system_var.status = 2;
 }
 
-int	is_builtin(char *cmd)
+int is_builtin(char *cmd)
 {
 	if (!cmd)
 		return (0);
-	if (!ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "echo") \
-	|| !ft_strcmp(cmd, "pwd") || !ft_strcmp(cmd, "env") \
-	|| !ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "unset") \
-	|| !ft_strcmp(cmd, "exit"))
+	if (!ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "echo") || !ft_strcmp(cmd, "pwd") || !ft_strcmp(cmd, "env") || !ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "unset") || !ft_strcmp(cmd, "exit"))
 		return (1);
 	return (0);
 }

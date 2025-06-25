@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
-void	ft_free_strs(char **s)
+void ft_free_strs(char **s)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (s[i])

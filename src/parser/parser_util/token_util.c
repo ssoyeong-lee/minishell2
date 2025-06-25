@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
-void	init_token_info(t_token_info *t_info)
+void init_token_info(t_token_info *t_info)
 {
 	t_info->i = 0;
 	t_info->l_list = (t_lst *)malloc(sizeof(t_lst));
@@ -25,7 +25,7 @@ void	init_token_info(t_token_info *t_info)
 	init_deque(&t_info->result);
 }
 
-void	reset_token_info(t_token_info *t_info)
+void reset_token_info(t_token_info *t_info)
 {
 	t_info->buf_token.redir = t_info->q_redir;
 	list_to_strs(t_info->l_list, &t_info->buf_token);
@@ -40,10 +40,10 @@ void	reset_token_info(t_token_info *t_info)
 	t_info->i++;
 }
 
-int	repeat_char(char *s, char c)
+int repeat_char(char *s, char c)
 {
-	int	i;
-	int	repeat_flag;
+	int i;
+	int repeat_flag;
 
 	repeat_flag = 1;
 	i = 1;
@@ -52,16 +52,16 @@ int	repeat_char(char *s, char c)
 		if (s[i] != c)
 		{
 			repeat_flag = 0;
-			break ;
+			break;
 		}
 		i++;
 	}
 	return (repeat_flag);
 }
 
-char	*opt_convert(int *flag, int i, char *temp)
+char *opt_convert(int *flag, int i, char *temp)
 {
-	char	*result;
+	char *result;
 
 	if (*flag == 0 && i > 0 && ft_strncmp("-n", temp, 2) == 0)
 	{
@@ -72,7 +72,7 @@ char	*opt_convert(int *flag, int i, char *temp)
 		}
 	}
 	else if (i > 0 && flag == 0 && temp[0] != '-')
-			*flag = 1;
+		*flag = 1;
 	result = ft_strdup(temp);
 	return (result);
 }
