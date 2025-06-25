@@ -26,7 +26,7 @@ void heredoc_signal(int sig)
 
 static void write_heredoc(char *line, char *end_str, int hd_fd)
 {
-	while (ft_strcmp(line, end_str) != 0)
+	while (ft_strncmp(line, end_str, ft_strlen(line) + 1) != 0)
 	{
 		if (ft_strchr(line, '$'))
 			line = convert_env(line);

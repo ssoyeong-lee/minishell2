@@ -14,19 +14,19 @@
 
 void run_builtin(char **cmds)
 {
-	if (!ft_strcmp(cmds[0], "cd"))
+	if (!ft_strncmp(cmds[0], "cd", ft_strlen(cmds[0]) + 1))
 		ft_cd(cmds);
-	if (!ft_strcmp(cmds[0], "echo"))
+	if (!ft_strncmp(cmds[0], "echo", ft_strlen(cmds[0]) + 1))
 		ft_echo(cmds);
-	if (!ft_strcmp(cmds[0], "pwd"))
+	if (!ft_strncmp(cmds[0], "pwd", ft_strlen(cmds[0]) + 1))
 		ft_pwd(cmds);
-	if (!ft_strcmp(cmds[0], "env"))
+	if (!ft_strncmp(cmds[0], "env", ft_strlen(cmds[0]) + 1))
 		ft_env(cmds);
-	if (!ft_strcmp(cmds[0], "export"))
+	if (!ft_strncmp(cmds[0], "export", ft_strlen(cmds[0]) + 1))
 		ft_export(cmds);
-	if (!ft_strcmp(cmds[0], "unset"))
+	if (!ft_strncmp(cmds[0], "unset", ft_strlen(cmds[0]) + 1))
 		ft_unset(cmds);
-	if (!ft_strcmp(cmds[0], "exit"))
+	if (!ft_strncmp(cmds[0], "exit", ft_strlen(cmds[0]) + 1))
 		ft_exit(cmds);
 }
 

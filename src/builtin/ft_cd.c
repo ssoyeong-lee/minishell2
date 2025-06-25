@@ -17,14 +17,14 @@ static char *find_real_path(char *path)
 	t_dictionary_node *env;
 	char *real_path;
 
-	if (!path || ft_strcmp(path, "~") == 0)
+	if (!path || ft_strncmp(path, "~", 2) == 0)
 	{
 		env = dictionary_search(g_system_var.env, "HOME");
 		if (!env)
 			return (NULL);
 		real_path = ft_strdup(env->value);
 	}
-	else if (ft_strcmp(path, "-") == 0)
+	else if (ft_strncmp(path, "-", 2) == 0)
 	{
 		env = dictionary_search(g_system_var.env, "OLDPWD");
 		if (!env)
@@ -84,7 +84,7 @@ void ft_cd(char **cmds)
 	char *real_path;
 
 	real_path = find_real_path(cmds[1]);
-	if (!cmds[1] || !ft_strcmp(cmds[1], "-") || !ft_strcmp(cmds[1], "~"))
+	if (!cmds[1] || !ft_strncmp(cmds[1], "-", 2) || !ft_strncmp(cmds[1], "~", 2))
 	{
 		if (real_path)
 			ft_putendl_fd(real_path, STDOUT_FILENO);

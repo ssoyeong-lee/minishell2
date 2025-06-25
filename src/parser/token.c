@@ -49,7 +49,7 @@ void list_to_strs(t_lst *list, t_token *buf_token)
 	buf_token->cmdline = (char **)malloc(s * sizeof(char *));
 	while (s--)
 	{
-		if (ft_strcmp(l_data(list, 0), "(null)") == 0)
+		if (ft_strncmp(l_data(list, 0), "(null)", ft_strlen("(null)") + 1) == 0)
 		{
 			delete_node(list, 0);
 			continue;

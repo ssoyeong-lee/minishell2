@@ -57,7 +57,7 @@ static void check_quotat(t_lexer_info *split_info, char const *s, char **split)
 		split_info->flag = 2;
 	if (split[0] != NULL)
 	{
-		if (ft_strcmp(split[0], "export") == 0 && ft_strchr(temp, '\"'))
+		if (ft_strncmp(split[0], "export", ft_strlen("export") + 1) == 0 && ft_strchr(temp, '\"'))
 		{
 			split_info->flag = 3;
 		}

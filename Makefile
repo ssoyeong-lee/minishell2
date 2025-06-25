@@ -2,7 +2,7 @@ NAME			= minishell
 
 # LIBRARY
 LIBFT				= ft
-LIBFT_PATH	= lib/libft
+LIBFT_PATH	= libft
 READLINE		= readline
 READLINE_PATH = $(shell brew --prefix readline)
 
@@ -11,7 +11,7 @@ CC = cc
 RM = rm -rf
 
 CFLAGS			= -Wall -Wextra -Werror
-CPPFLAGS		= -I include -I$(READLINE_PATH)/include
+CPPFLAGS		= -I ./include -I $(LIBFT_PATH)/include -I$(READLINE_PATH)/include
 LDFLAGS			= -L $(LIBFT_PATH) -L$(READLINE_PATH)/lib
 LDLIBS			= -l $(LIBFT) -l $(READLINE)
 
@@ -106,6 +106,7 @@ $(OBJS_DIR)/%.o: %.c
 
 $(LIBFT):
 	@make -C $(LIBFT_PATH)
+
 
 clean:
 	@rm -rf $(OBJS_DIR)

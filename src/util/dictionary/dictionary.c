@@ -36,7 +36,7 @@ int dictionary_add(t_dictionary *head, char *key, char *value)
 			head->head = dic_add_util(temp, key, value);
 			break;
 		}
-		else if (ft_strcmp(temp->key, key) == 0)
+		else if (ft_strncmp(temp->key, key, ft_strlen(key) + 1) == 0)
 			return (false);
 		else if (temp->link == NULL)
 		{
@@ -59,7 +59,7 @@ int dictionary_delete(t_dictionary *head, char *key)
 	{
 		if (ptr == NULL)
 			return (false);
-		else if (ft_strcmp(ptr->key, key) == 0)
+		else if (ft_strncmp(ptr->key, key, ft_strlen(key) + 1) == 0)
 			break;
 		ptr = ptr->link;
 	}
@@ -77,7 +77,7 @@ t_dictionary_node *dictionary_search(t_dictionary head, char *key)
 	{
 		if (temp == NULL)
 			return (NULL);
-		if (ft_strcmp(temp->key, key) == 0)
+		if (ft_strncmp(temp->key, key, ft_strlen(key) + 1) == 0)
 			return (temp);
 		temp = temp->link;
 	}

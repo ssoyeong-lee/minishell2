@@ -30,7 +30,7 @@
 # include <stdbool.h>
 # include <readline/history.h>
 
-# include "../lib/libft/libft.h"
+# include "libft.h"
 # include "struct.h"
 # include "dictionary.h"
 # include "builtin.h"
