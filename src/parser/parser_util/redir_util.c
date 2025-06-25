@@ -52,11 +52,9 @@ t_redir	dequeue_redir(t_redir_queue *queue)
 
 void	free_redir(t_redir_queue *que)
 {
-	t_redir	buf;
-
 	while (que->count != 0)
 	{
-		buf = dequeue_redir(que);
+		dequeue_redir(que);
 	}
 	free(que);
 }

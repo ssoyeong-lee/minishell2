@@ -43,10 +43,8 @@ char	*remove_quote(char *s, char c)
 int	find_env(char *s)
 {
 	int	i;
-	int	result;
 
 	i = 0;
-	result = 0;
 	while (s[i])
 	{
 		if (s[i] == '$')
