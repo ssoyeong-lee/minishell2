@@ -55,7 +55,7 @@ static int check_valid_arg(char *arg)
 	{
 		ft_putstr_fd("minish: export: \'", STDERR_FILENO);
 		ft_putstr_fd(arg, STDERR_FILENO);
-		ft_putendl_fd("\': not a avalid identifier", STDERR_FILENO);
+		ft_putendl_fd("\': not a valid identifier", STDERR_FILENO);
 		g_system_var.status = 1;
 		return (0);
 	}
