@@ -78,7 +78,7 @@ t_deque make_tokens(char **lexer)
 			t_i.buf_token.redir = t_i.q_redir;
 			t_i.i++;
 		}
-		else if (ft_strchr("\"\'", lexer[t_i.i][0]))
+		else if (ft_strchr(lexer[t_i.i], '\'') || ft_strchr(lexer[t_i.i], '\"'))
 			make_quoteline(t_i.l_list, lexer[t_i.i++]);
 		else
 			make_cmdline(t_i.l_list, lexer[t_i.i++]);

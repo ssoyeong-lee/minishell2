@@ -47,20 +47,11 @@ int find_env(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == '$')
+		if (s[i] == '$' && !(s[i + 1] == 0 || s[i + 1] == ' ' || s[i + 1] == '\'' || s[i + 1] == '\"'))
 			return (1);
 		i++;
 	}
 	return (0);
-}
-
-void make_single_quote(char *s, t_lst *list)
-{
-	char *node;
-
-	node = remove_quote(s, '\'');
-	insert_node(list, l_size(list), node);
-	free(node);
 }
 
 char *loop_convert(char *s)
@@ -78,27 +69,69 @@ char *loop_convert(char *s)
 	return (env_convert);
 }
 
+static char* get_quote_line(char *s, unsigned int *start_idx, char c) {
+	int		idx;
+	int		cnt;
+	int		len;
+	char* ret;
+
+	idx = *start_idx;
+	cnt = 0;
+	len = 0;
+	while (s[idx] && cnt != 2) {
+		if (s[idx] == c) {
+			cnt ++;
+		}
+		idx ++;
+		len ++;
+	}
+	ret = ft_substr(s, *start_idx + 1, len - 2);
+	*start_idx = idx;
+	return ret;
+}
+
+char* make_single_quote(char *s, unsigned int *start_idx)
+{
+	return get_quote_line(s, start_idx, '\'');
+}
+
+char* make_double_quote(char *s, unsigned int *start_idx)
+{
+	char* tmp;
+	char*	ret;
+
+	tmp = get_quote_line(s, start_idx, '\"');
+	ret = loop_convert(tmp);
+	free(tmp);
+	return ret;
+}
+
 void make_quoteline(t_lst *list, char *s)
 {
-	char *env_convert;
-	char *node;
+	unsigned int	idx;
+	char					*node;
+	char					*tmp;
+	char					*convert_ret;
 
-	if (ft_strchr("\"", s[0]))
-	{
-		env_convert = loop_convert(s);
-		if (ft_strncmp("(null)", env_convert, 6) == 0)
-		{
-			node = remove_quote(s, '\"');
-			insert_node(list, l_size(list), node);
+	idx = 0;
+	node = ft_strdup("");
+	while (s[idx]) {
+		if (s[idx] == '\'') {
+			convert_ret = make_single_quote(s, &idx);
+			ft_strlen(convert_ret);
+		} else if (s[idx] == '\"') {
+			convert_ret = make_double_quote(s, &idx);
+			ft_strlen(convert_ret);
+		} else {
+			convert_ret = ft_calloc(2, sizeof(char));
+			*convert_ret = s[idx++];
 		}
-		else
-		{
-			node = remove_quote(env_convert, '\"');
-			insert_node(list, l_size(list), node);
-		}
-		free(env_convert);
+		tmp = ft_strjoin(node, convert_ret);
 		free(node);
+		node = tmp;
+		
+		free(convert_ret);
 	}
-	else if (ft_strchr("\'", s[0]))
-		make_single_quote(s, list);
+	insert_node(list, l_size(list), node);
+	free(node);
 }

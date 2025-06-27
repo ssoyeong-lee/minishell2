@@ -38,7 +38,7 @@ static void init_env_idx(const char *s, t_env_convert_info *env_idx)
 		return;
 	while (s[env_idx->start_idx] != '$')
 		env_idx->start_idx++;
-	if (s[env_idx->start_idx + 1] == '?' && strlen(s) == 2)
+	if (s[env_idx->start_idx + 1] == '?')
 		env_idx->end_idx = env_idx->start_idx + 2;
 	else
 	{
@@ -82,12 +82,12 @@ char *convert_env(const char *s)
 	char *env_v;
 
 	init_env_idx(s, &env_idx);
-	if (env_idx.flag == -1)
+	if (env_idx.flag == -1 || ft_strncmp(s, "$", 2) == 0)
 		return (ft_strdup(s));
 	dictionary_add(&g_system_var.env, ft_strdup("?"),
 								 ft_itoa(g_system_var.status));
 	result = ft_substr(s, 0, env_idx.start_idx);
-	env_v = ft_substr(s, env_idx.start_idx + 1, env_idx.end_idx);
+	env_v = ft_substr(s, env_idx.start_idx + 1, env_idx.end_idx - env_idx.start_idx - 1);
 	if (dictionary_search(g_system_var.env, env_v) != NULL)
 		result = find_env_key(env_v, result);
 	else
