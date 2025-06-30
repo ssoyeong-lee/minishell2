@@ -71,7 +71,7 @@ char *opt_convert(int *flag, int i, char *temp)
 			return (result);
 		}
 	}
-	else if (i > 0 && flag == 0 && temp[0] != '-')
+	else if (i > 0 && *flag == 0 && temp[0] != '-')
 		*flag = 1;
 	result = ft_strdup(temp);
 	return (result);

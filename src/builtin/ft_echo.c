@@ -19,18 +19,15 @@ void ft_echo(char **cmds)
 
 	i = 1;
 	tag = 1;
+	if (ft_strncmp("-n", cmds[i], 3) == 0) {
+		tag = 0;
+		i++;
+	}
 	while (cmds[i])
 	{
-		if (ft_strncmp("-n", cmds[i], 3) == 0)
-		{
-			tag = 0;
-		}
-		else
-		{
-			ft_putstr_fd(cmds[i], STDOUT_FILENO);
-			if (cmds[i + 1])
-				ft_putstr_fd(" ", STDOUT_FILENO);
-		}
+		ft_putstr_fd(cmds[i], STDOUT_FILENO);
+		if (cmds[i + 1])
+			ft_putstr_fd(" ", STDOUT_FILENO);
 		i++;
 	}
 	if (tag)
