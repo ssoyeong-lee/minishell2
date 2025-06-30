@@ -39,6 +39,8 @@ void		make_cmdline(t_lst *list, char *s);
 void		make_quoteline(t_lst *list, char *s);
 char		*convert_env(const char *s);
 
+char *remove_quote_and_convert_env(char *s);
+
 void		make_redir(t_redir_queue *buf_redir, char **s, int *idx);
 void		add_redir(t_redir_queue *r_que, t_redir buf_redir);
 t_redir		dequeue_redir(t_redir_queue *queue);

@@ -53,6 +53,10 @@ void is_only_redir(t_redir *buf_redir, char **s, int *idx, int redir_size)
 	{
 		buf_redir->file_name = ft_strdup("\n");
 	}
+	else if (ft_strchr(s[*idx + 1], '\'') || ft_strchr(s[*idx + 1], '\"')) {
+		buf_redir->file_name = remove_quote_and_convert_env(s[*idx + 1]);
+		*idx += 1;
+	}
 	else
 	{
 		buf_redir->file_name = ft_strdup(s[*idx + 1]);

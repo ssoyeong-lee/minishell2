@@ -90,12 +90,12 @@ static char* get_quote_line(char *s, unsigned int *start_idx, char c) {
 	return ret;
 }
 
-char* make_single_quote(char *s, unsigned int *start_idx)
+static char* make_single_quote(char *s, unsigned int *start_idx)
 {
 	return get_quote_line(s, start_idx, '\'');
 }
 
-char* make_double_quote(char *s, unsigned int *start_idx)
+static char* make_double_quote(char *s, unsigned int *start_idx)
 {
 	char* tmp;
 	char*	ret;
@@ -106,32 +106,37 @@ char* make_double_quote(char *s, unsigned int *start_idx)
 	return ret;
 }
 
-void make_quoteline(t_lst *list, char *s)
-{
+char *remove_quote_and_convert_env(char *s) {
 	unsigned int	idx;
-	char					*node;
+	char					*ret;
 	char					*tmp;
 	char					*convert_ret;
 
 	idx = 0;
-	node = ft_strdup("");
+	ret = ft_strdup("");
 	while (s[idx]) {
 		if (s[idx] == '\'') {
 			convert_ret = make_single_quote(s, &idx);
-			ft_strlen(convert_ret);
 		} else if (s[idx] == '\"') {
 			convert_ret = make_double_quote(s, &idx);
-			ft_strlen(convert_ret);
 		} else {
 			convert_ret = ft_calloc(2, sizeof(char));
 			*convert_ret = s[idx++];
 		}
-		tmp = ft_strjoin(node, convert_ret);
-		free(node);
-		node = tmp;
+		tmp = ft_strjoin(ret, convert_ret);
+		free(ret);
+		ret = tmp;
 		
 		free(convert_ret);
 	}
-	insert_node(list, l_size(list), node);
-	free(node);
+	return ret;
+}
+
+void make_quoteline(t_lst *list, char *s)
+{
+	char *res;
+
+	res = remove_quote_and_convert_env(s);
+	insert_node(list, l_size(list), res);
+	free(res);
 }
