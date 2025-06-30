@@ -82,18 +82,20 @@ void is_only_redir(t_redir *buf_redir, char **s, int *idx, int redir_size)
 	}
 }
 
-void make_redir(t_redir_queue *r_que, char **s, int *idx)
+void make_redir(t_redir_queue *r_que, char **s, int *idx_ptr)
 {
 	char *t_fname;
 	int redir_size;
 	t_redir buf_redir;
+	int	idx;
 
+	idx = *idx_ptr;
 	buf_redir.hd_number = 0;
-	redir_size = get_redir_size(s[*idx]);
-	if (is_redirandfilename(s[*idx]))
+	redir_size = get_redir_size(s[idx]);
+	if (is_redirandfilename(s[idx]))
 	{
-		buf_redir.type = get_redir_type(s[*idx], redir_size);
-		t_fname = ft_substr(s[*idx], redir_size, ft_strlen(s[*idx]));
+		buf_redir.type = get_redir_type(s[idx], redir_size);
+		t_fname = ft_substr(s[idx], redir_size, ft_strlen(s[idx]));
 		buf_redir.file_name = t_fname;
 		if (buf_redir.type == HERE_DOC)
 		{
@@ -104,7 +106,7 @@ void make_redir(t_redir_queue *r_que, char **s, int *idx)
 	}
 	else
 	{
-		is_only_redir(&buf_redir, s, idx, redir_size);
+		is_only_redir(&buf_redir, s, idx_ptr, redir_size);
 		add_redir(r_que, buf_redir);
 	}
 }
