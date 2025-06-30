@@ -69,7 +69,19 @@ static char **spt(char **split, char c, char const *s, t_lexer_info *info)
 {
 	while (info->i <= ft_strlen(s))
 	{
-		if (s[info->i] != c && info->index < 0)
+		if (info->flag == 0 && (s[info->i] == '|'|| s[info->i] == '<'|| s[info->i] == '>')) {
+			if (info->index != -1)
+				split[info->j++] = word_dup(s, info->index, info->i, info);
+			if (s[info->i] == '|' || s[info->i] != s[info->i + 1]) {
+				split[info->j++] = word_dup(s, info->i, info->i + 1, info);
+			}
+			else {
+				split[info->j++] = word_dup(s, info->i, info->i + 2, info);
+				info->i++;
+			}
+			info->flag = 0;
+		}
+		else if (s[info->i] != c && info->index < 0)
 			check_quotat(info, s, split);
 		else if ((s[info->i] == c || info->i == ft_strlen(s)) && info->index >= 0 && info->flag == 0)
 			split[info->j++] = word_dup(s, info->index, info->i, info);
@@ -107,9 +119,9 @@ char **lexer(char const *s)
 	if (!s)
 		return (NULL);
 	split = (char **)malloc((count_words(s, ' ') + 1) * sizeof(char *));
-	split[0] = NULL;
 	if (!(split))
 		return (0);
+	split[0] = NULL;
 	split = spt(split, ' ', s, info);
 	free(info);
 	return (split);
