@@ -82,7 +82,7 @@ char *convert_env(const char *s)
 	char *env_v;
 
 	init_env_idx(s, &env_idx);
-	if (env_idx.flag == -1 || ft_strncmp(s, "$", 2) == 0)
+	if (env_idx.flag == -1 || env_idx.end_idx - env_idx.start_idx == 1)
 		return (ft_strdup(s));
 	dictionary_add(&g_system_var.env, ft_strdup("?"),
 								 ft_itoa(g_system_var.status));
