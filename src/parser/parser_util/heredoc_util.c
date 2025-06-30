@@ -21,7 +21,7 @@ void heredoc_unlink(void)
 	hd_cnt = 1;
 	while (hd_cnt <= g_system_var.hd_cnt)
 	{
-		temp = ft_itoa(g_system_var.hd_cnt);
+		temp = ft_itoa(hd_cnt);
 		filename = ft_strjoin("here_doc", temp);
 		free(temp);
 		if (access(filename, F_OK) == 0)

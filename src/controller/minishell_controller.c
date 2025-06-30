@@ -78,6 +78,7 @@ void minishell_start(void)
 	while (1)
 	{
 		g_system_var.hd_flag = 0;
+		g_system_var.hd_cnt = 0;
 		cmd_line = set_read_line();
 		if (cmd_line[0] == 0)
 		{
