@@ -17,11 +17,12 @@ void ft_echo(char **cmds)
 	int i;
 	int tag;
 
-	i = 1;
-	tag = 1;
-	if (ft_strncmp("-n", cmds[i], 3) == 0) {
+	if (cmds[1] && ft_strncmp("-n", cmds[1], 3) == 0) {
 		tag = 0;
-		i++;
+		i = 2;
+	} else {
+		tag = 1;
+		i = 1;
 	}
 	while (cmds[i])
 	{
